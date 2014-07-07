@@ -20,7 +20,7 @@ func TestStringCalculator_OneNumber_ReturnsNumber(t *testing.T) {
 	}
 }
 
-func TestStringCalculator_TwoNumberSeperatedByDelimiter_ReturnsSum(t *testing.T) {
+func TestStringCalculator_TwoNumberSeparatedByDelimiter_ReturnsSum(t *testing.T) {
 	var v = StringCalculator("1,2")
 
 	if v != 3 {
