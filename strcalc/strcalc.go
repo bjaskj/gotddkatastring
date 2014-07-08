@@ -8,10 +8,10 @@ import (
 const separatorComma = ","
 const separatorNewLine = "\n"
 
-func StringCalculator(input string) int64 {
+func StringCalculator(input string) (value int64, error bool) {
 	// return zero if no values
 	if input == "" {
-		return 0
+		return 0, false
 	}
 
 	var values = []string{}
@@ -28,10 +28,16 @@ func StringCalculator(input string) int64 {
 
 	for _, v := range values {
 		i, _ := strconv.ParseInt(v, 0, 32)
+
+		// check if less than zero, if so return error
+		if (i < 0) {
+			return 0, true
+		}
+
 		sum += i
 	}
 
-	return sum
+	return sum, false
 }
 
 func valuesByStandardDelimiter(input string) []string {
