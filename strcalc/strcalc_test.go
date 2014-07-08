@@ -20,10 +20,17 @@ func TestStringCalculator_OneNumber_ReturnsNumber(t *testing.T) {
 	}
 }
 
-func TestStringCalculator_TwoNumberSeparatedByDelimiter_ReturnsSum(t *testing.T) {
-	var v = StringCalculator("1,2")
+func TestStringCalculator_MultipleNumbersSeparatedByDelimiter_ReturnsSum(t *testing.T) {
+	testCases := map[int64]string{
+		3: "1,2",
+		10: "1,2,3,4",
+	}
 
-	if v != 3 {
-		t.Error("Expected 3, got ", v)
+	for expected, input := range testCases {
+		var v = StringCalculator(input)
+
+		if v != expected {
+			t.Error("Expected", expected, ", got ", v)
+		}
 	}
 }
