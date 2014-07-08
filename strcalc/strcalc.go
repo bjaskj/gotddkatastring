@@ -17,19 +17,11 @@ func StringCalculator(input string) int64 {
 	var values = []string{}
 
 	// check if we have prefix
-	if strings.HasPrefix(input, "//") {
+	if hasDelimiter(input) {
 		// we have prefix to change delimiter
-		delimiter := string(input[2])
-		values = strings.Split(input[4:], delimiter)
+		values = valuesByCustomDelimiter(input)
 	} else {
-		// we don't have prefix to change delimiter
-		valuesFromComma := strings.Split(input, separatorComma)
-
-		for _, v := range valuesFromComma {
-			valuesFromNewLine := strings.Split(v, separatorNewLine)
-
-			values = append(values, valuesFromNewLine...)
-		}
+		values = valuesByStandardDelimiter(input)
 	}
 
 	var sum int64
@@ -40,4 +32,28 @@ func StringCalculator(input string) int64 {
 	}
 
 	return sum
+}
+
+func valuesByStandardDelimiter(input string) []string {
+	var values = []string{}
+
+	// we don't have prefix to change delimiter
+	valuesFromComma := strings.Split(input, separatorComma)
+
+	for _, v := range valuesFromComma {
+		valuesFromNewLine := strings.Split(v, separatorNewLine)
+
+		values = append(values, valuesFromNewLine...)
+	}
+
+	return values
+}
+
+func valuesByCustomDelimiter(input string) []string {
+	delimiter := string(input[2])
+	return strings.Split(input[4:], delimiter)
+}
+
+func hasDelimiter(input string) bool {
+	return strings.HasPrefix(input, "//")
 }
