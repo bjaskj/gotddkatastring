@@ -42,3 +42,11 @@ func TestStringCalculator_NewLineAsDelimiter_ReturnsSum(t *testing.T) {
 		t.Error("Expected 3, got ", v)
 	}
 }
+
+func TestStringCalculator_ChangeDelimiter_ReturnsSum(t *testing.T) {
+	var v = StringCalculator("//;\n1;2")
+
+	if v != 3 {
+		t.Error("Expected 3, got ", v)
+	}
+}

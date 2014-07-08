@@ -9,17 +9,27 @@ const separatorComma = ","
 const separatorNewLine = "\n"
 
 func StringCalculator(input string) int64 {
+	// return zero if no values
 	if input == "" {
 		return 0
 	}
 
 	var values = []string{}
-	valuesFromComma := strings.Split(input, separatorComma)
 
-	for _, v := range valuesFromComma {
-		valuesFromNewLine := strings.Split(v, separatorNewLine)
+	// check if we have prefix
+	if strings.HasPrefix(input, "//") {
+		// we have prefix to change delimiter
+		delimiter := string(input[2])
+		values = strings.Split(input[4:], delimiter)
+	} else {
+		// we don't have prefix to change delimiter
+		valuesFromComma := strings.Split(input, separatorComma)
 
-		values = append(values, valuesFromNewLine...)
+		for _, v := range valuesFromComma {
+			valuesFromNewLine := strings.Split(v, separatorNewLine)
+
+			values = append(values, valuesFromNewLine...)
+		}
 	}
 
 	var sum int64
