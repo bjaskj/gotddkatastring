@@ -34,3 +34,11 @@ func TestStringCalculator_MultipleNumbersSeparatedByDelimiter_ReturnsSum(t *test
 		}
 	}
 }
+
+func TestStringCalculator_NewLineAsDelimiter_ReturnsSum(t *testing.T) {
+	var v = StringCalculator("1\n2")
+
+	if v != 3 {
+		t.Error("Expected 3, got ", v)
+	}
+}

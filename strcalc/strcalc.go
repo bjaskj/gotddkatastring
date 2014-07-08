@@ -5,14 +5,22 @@ import (
 	"strings"
 )
 
-const separator = ","
+const separatorComma = ","
+const separatorNewLine = "\n"
 
 func StringCalculator(input string) int64 {
 	if input == "" {
 		return 0
 	}
 
-	values := strings.Split(input, separator)
+	var values = []string{}
+	valuesFromComma := strings.Split(input, separatorComma)
+
+	for _, v := range valuesFromComma {
+		valuesFromNewLine := strings.Split(v, separatorNewLine)
+
+		values = append(values, valuesFromNewLine...)
+	}
 
 	var sum int64
 
